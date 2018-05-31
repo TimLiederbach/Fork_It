@@ -26,3 +26,8 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.landing_image {
+  width: 95%;
+  height: 30em;
+}
