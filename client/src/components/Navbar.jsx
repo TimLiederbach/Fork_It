@@ -13,7 +13,9 @@ class Navbar extends Component {
             <div
               name='Logout'
             >
-              <Link to="/">
+              <Link
+                onSubmit={ this.handleLogout }
+                to="/">
                 Logout
               </Link>
             </div>

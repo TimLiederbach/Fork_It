@@ -8,9 +8,9 @@
 
 
 user2 = User.new
-user.username = 'Tim'
-user.email = 'tim@gmail.com'
-user.password = '123'
-user.password_confirmation = '123'
-user.save
+user2.username = 'Tim'
+user2.email = 'tim@gmail.com'
+user2.password = '123'
+user2.password_confirmation = '123'
+user2.save
 

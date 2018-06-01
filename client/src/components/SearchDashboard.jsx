@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-class LoginForm extends Component {
+class SearchDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: ''
+      keyword: '',
+      entity_id: 36932
     }
   this.handleInputChange = this.handleInputChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,46 +21,40 @@ class LoginForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onLogin(this.state);
+    this.props.onSubmit(this.state);
     this.setState({
-      email: '',
-      password: '',
-      isUserLoggedIn: true
+      keyword: '',
+      hasUserSubmitted: true
     });
   }
 
   render() {
     return (
       <div>
+        <input
+          type='text'
+          ref='term'
+          name='term'
+          placeholder="Search term" />
 
         {this.state.isUserLoggedIn && <Redirect to ='/' />}
 
         <form onSubmit={this.handleSubmit}>
 
           <label>
-            Email:
             <input
               type='text'
               onChange={this.handleInputChange}
-              value={this.state.email}
-              name='email'
-            />
-          </label>
-
-          <label>
-            Password:
-            <input
-              type='password'
-              onChange={this.handleInputChange}
-              value={this.state.password}
-              name='password'
+              value={this.state.keyword}
+              name='keyword'
+              placeholder='search cuisine or restaurant'
             />
           </label>
 
           <button
             type='submit'
-            className='login-button'
-          >Login
+            className='search-button'
+          >Search
           </button>
 
         </form>
@@ -69,4 +63,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default SearchDashboard;
