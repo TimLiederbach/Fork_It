@@ -31,12 +31,6 @@ class SearchDashboard extends Component {
   render() {
     return (
       <div>
-        <input
-          type='text'
-          ref='term'
-          name='term'
-          placeholder="Search term" />
-
         {this.state.isUserLoggedIn && <Redirect to ='/' />}
 
         <form onSubmit={this.handleSubmit}>

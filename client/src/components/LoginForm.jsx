@@ -33,7 +33,7 @@ class LoginForm extends Component {
     return (
       <div>
 
-        {this.state.isUserLoggedIn && <Redirect to ='/' />}
+        {this.state.isUserLoggedIn && <Redirect to ='/search' />}
 
         <form onSubmit={this.handleSubmit}>
 

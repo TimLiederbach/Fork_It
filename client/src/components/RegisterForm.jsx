@@ -35,7 +35,7 @@ class RegisterForm extends Component {
     return (
       <div>
 
-        {this.state.isUserLoggedIn && <Redirect to ='/' />}
+        {this.state.isUserLoggedIn && <Redirect to ='/login' />}
 
         <form onSubmit={this.handleSubmit}>
 

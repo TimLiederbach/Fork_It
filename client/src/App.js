@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import dotenv from 'dotenv';
 import './App.css';
 import Landing from './components/Landing';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import Navbar from './components/Navbar';
+import SearchDashboard from './components/SearchDashboard'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const API_KEY = process.env.API_KEY
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 class App extends Component {
   constructor() {
@@ -20,6 +22,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this)
     this.handleRegister = this.handleRegister.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   isLoggedIn()  {
@@ -84,35 +87,23 @@ class App extends Component {
     })
   }
 
-, {
-    method: 'GET',
-    withCredentials: true,
-    credentials: 'include',
-    headers: {
-      Authorization: bearer,
-      'content-type': 'application/json'
-    }
-  })
-
-
-  fetchRestaurants(keyword) {
-    console.log(keyword)
-    const url = `https://developers.zomato.com/api/v2.1/search?entity_id=36932&q=${keyword}&count=20`
+  fetchRestaurants(input) {
+    const url = `https://developers.zomato.com/api/v2.1/search?entity_id=36932&q=${input.keyword}&count=20`
     const init = {
       method: 'GET',
       headers: {
-        Accept: 'application/json',
+        'Accept': 'application/json',
         'user-key': API_KEY
       }
     }
-
     fetch(url, init)
     .then(res => {
-      if(!resp.ok) throw new Error(resp.statusMessage);
-      return resp.json();
+      if(!res.ok) throw new Error(res.statusMessage);
+      return res.json();
     })
     .then(resBody=> console.log(resBody.restaurants)
     )
+    .catch(err=> console.log(err))
   }
 
   componentDidMount() {
@@ -135,8 +126,8 @@ class App extends Component {
     this.logout();
   }
 
-  handleSearch(keyword)  {
-    this.fetchRestaurants(keyword);
+  handleSearch(input)  {
+    this.fetchRestaurants(input);
   }
 
   render() {
