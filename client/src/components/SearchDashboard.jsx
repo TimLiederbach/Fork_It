@@ -31,7 +31,11 @@ class SearchDashboard extends Component {
   render() {
     return (
       <div>
-        {this.state.isUserLoggedIn && <Redirect to ='/' />}
+
+
+        {this.state.hasUserSubmitted && <Redirect to ='/restaurants' />}
+
+
 
         <form onSubmit={this.handleSubmit}>
 

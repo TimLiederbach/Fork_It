@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import Navbar from './components/Navbar';
 import SearchDashboard from './components/SearchDashboard'
+import RestaurantDashboard from './components/RestaurantDashboard'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -93,7 +94,7 @@ class App extends Component {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'user-key': API_KEY
+        'user-key': '85b5695feaf12f73f74644ebd7852b2c'
       }
     }
     fetch(url, init)
@@ -101,8 +102,14 @@ class App extends Component {
       if(!res.ok) throw new Error(res.statusMessage);
       return res.json();
     })
-    .then(resBody=> console.log(resBody.restaurants)
-    )
+    // debugger 1;
+    .then(resBody=> {
+      console.log('this be resBody.res', resBody.restaurants)
+      this.setState({
+        restaurants: resBody.restaurants
+      })
+    })
+    // debugger 2;
     .catch(err=> console.log(err))
   }
 
@@ -157,6 +164,14 @@ class App extends Component {
           <Route
             path = "/search"
             render = { () => (<SearchDashboard onSubmit={ this.handleSearch } />)}
+          />
+
+          <Route
+            path = "/restaurants"
+            render = { () => (
+              <RestaurantDashboard
+                restaurants={ this.state.restaurants }
+              />)}
           />
 
         </div>
