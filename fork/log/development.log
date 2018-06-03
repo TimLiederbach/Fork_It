@@ -1597,3 +1597,13 @@ Processing by UserTokenController#create as JSON
 Completed 201 Created in 88ms (Views: 0.8ms | ActiveRecord: 1.1ms)
 
 
+Started POST "/user_token" for 127.0.0.1 at 2018-06-03 12:11:58 -0400
+  [1m[35m (207.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by UserTokenController#create as JSON
+  Parameters: {"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}, "user_token"=>{"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (18.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tim@gmail.com"], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 201 Created in 375ms (Views: 1.0ms | ActiveRecord: 26.9ms)
+
+

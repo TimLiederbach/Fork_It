@@ -7,6 +7,7 @@ import RegisterForm from './components/RegisterForm';
 import Navbar from './components/Navbar';
 import SearchDashboard from './components/SearchDashboard'
 import RestaurantDashboard from './components/RestaurantDashboard'
+import Restaurant from './components/Restaurant'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -113,6 +114,12 @@ class App extends Component {
     .catch(err=> console.log(err))
   }
 
+  findRestaurant(params_id)  {
+    const filterRestaurant = this.state.restaurants.filter(restaurant =>
+      restaurant.restaurant.id === params_id)
+    return filterRestaurant
+  }
+
   componentDidMount() {
     this.isLoggedIn()
   }
@@ -167,12 +174,21 @@ class App extends Component {
           />
 
           <Route
-            path = "/restaurants"
+            exact path = "/restaurants"
             render = { () => (
               <RestaurantDashboard
                 restaurants={ this.state.restaurants }
               />)}
           />
+
+          <Route
+            path="/restaurants/:id"
+            component={ (props) => (
+              <Restaurant
+                {...props}
+                restaurant={ this.findRestaurant(props.match.params.id) }
+              />
+            )} />
 
         </div>
       </Router>
