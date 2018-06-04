@@ -1607,3 +1607,212 @@ Processing by UserTokenController#create as JSON
 Completed 201 Created in 375ms (Views: 1.0ms | ActiveRecord: 26.9ms)
 
 
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5214060807498510030)[0m
+  ↳ bin/rails:4
+  [1m[35m (47.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+Migrating to CreateReviews (20180604013737)
+  [1m[35m (19.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[35m (1057.8ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" bigserial primary key, "creator_email" character varying, "res_id" integer, "restaurant_name" character varying, "overall_rating" integer, "price_rating" integer, "food_quality" integer, "comments" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20180604013737_create_reviews.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180604013737"]]
+  ↳ bin/rails:4
+  [1m[35m (838.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:4
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(5214060807498510030)[0m
+  ↳ bin/rails:4
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:4
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 22:07:30 -0400
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (53.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (31.0ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 336ms (Views: 3.4ms | ActiveRecord: 94.3ms)
+
+
+Started POST "/user_token" for 127.0.0.1 at 2018-06-03 22:21:01 -0400
+Processing by UserTokenController#create as JSON
+  Parameters: {"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}, "user_token"=>{"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tim@gmail.com"], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 201 Created in 1070ms (Views: 0.6ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/reviews" for 127.0.0.1 at 2018-06-03 22:25:19 -0400
+Processing by ReviewsController#create as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 400 Bad Request in 69ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: review):
+  
+app/controllers/reviews_controller.rb:50:in `review_params'
+app/controllers/reviews_controller.rb:19:in `create'
+Started POST "/reviews" for 127.0.0.1 at 2018-06-03 22:28:57 -0400
+  [1m[35m (18.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by ReviewsController#create as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 400 Bad Request in 109ms (ActiveRecord: 5.8ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: review):
+  
+app/controllers/reviews_controller.rb:50:in `review_params'
+app/controllers/reviews_controller.rb:19:in `create'
+Started POST "/reviews" for 127.0.0.1 at 2018-06-03 22:31:30 -0400
+Processing by ReviewsController#create as JSON
+  Parameters: {"review"=>{"creator_email"=>"tim@gmail.com", "res_id"=>"16762160", "restaurant_name"=>"Carmine's Italian Restaurant - Times Square", "overall_rating"=>"3", "price_rating"=>"2", "food_quality"=>"4", "comments"=>"Great Atmosphere! I really enjoyed the food, but the prices were a bit too high"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[35m (20.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/reviews_controller.rb:21
+  [1m[36mReview Create (223.2ms)[0m  [1m[32mINSERT INTO "reviews" ("creator_email", "res_id", "restaurant_name", "overall_rating", "price_rating", "food_quality", "comments", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["creator_email", "tim@gmail.com"], ["res_id", 16762160], ["restaurant_name", "Carmine's Italian Restaurant - Times Square"], ["overall_rating", 3], ["price_rating", 2], ["food_quality", 4], ["comments", "Great Atmosphere! I really enjoyed the food, but the prices were a bit too high"], ["created_at", "2018-06-04 02:31:30.468032"], ["updated_at", "2018-06-04 02:31:30.468032"]]
+  ↳ app/controllers/reviews_controller.rb:21
+  [1m[35m (647.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/reviews_controller.rb:21
+Completed 201 Created in 918ms (Views: 2.1ms | ActiveRecord: 897.9ms)
+
+
+Started POST "/reviews" for 127.0.0.1 at 2018-06-03 22:41:57 -0400
+Processing by ReviewsController#create as JSON
+  Parameters: {"review"=>{"creator_email"=>"tim@gmail.com", "res_id"=>"16768491", "restaurant_name"=>"Italian Village Pizzeria & Restaurant", "overall_rating"=>"3", "price_rating"=>"3", "food_quality"=>"2", "comments"=>"Food was average at best, and the prices were somewhat reasonable"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/reviews_controller.rb:21
+  [1m[36mReview Create (0.8ms)[0m  [1m[32mINSERT INTO "reviews" ("creator_email", "res_id", "restaurant_name", "overall_rating", "price_rating", "food_quality", "comments", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["creator_email", "tim@gmail.com"], ["res_id", 16768491], ["restaurant_name", "Italian Village Pizzeria & Restaurant"], ["overall_rating", 3], ["price_rating", 3], ["food_quality", 2], ["comments", "Food was average at best, and the prices were somewhat reasonable"], ["created_at", "2018-06-04 02:41:57.227294"], ["updated_at", "2018-06-04 02:41:57.227294"]]
+  ↳ app/controllers/reviews_controller.rb:21
+  [1m[35m (11.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/reviews_controller.rb:21
+Completed 201 Created in 41ms (Views: 4.4ms | ActiveRecord: 13.1ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 23:03:14 -0400
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (3.7ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 141ms (Views: 23.4ms | ActiveRecord: 5.8ms)
+
+
+Started POST "/user_token" for 127.0.0.1 at 2018-06-03 23:03:28 -0400
+Processing by UserTokenController#create as JSON
+  Parameters: {"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}, "user_token"=>{"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tim@gmail.com"], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 201 Created in 84ms (Views: 0.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 23:05:07 -0400
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (0.9ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 7ms (Views: 2.6ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/user_token" for 127.0.0.1 at 2018-06-03 23:05:32 -0400
+Processing by UserTokenController#create as JSON
+  Parameters: {"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}, "user_token"=>{"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tim@gmail.com"], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 201 Created in 79ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 23:11:12 -0400
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 25ms (Views: 11.9ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/user_token" for 127.0.0.1 at 2018-06-03 23:11:21 -0400
+Processing by UserTokenController#create as JSON
+  Parameters: {"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}, "user_token"=>{"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tim@gmail.com"], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 201 Created in 110ms (Views: 5.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 23:18:32 -0400
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (1.1ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 23ms (Views: 10.3ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 23:21:16 -0400
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (7.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (3.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 41ms (Views: 7.3ms | ActiveRecord: 11.8ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 23:22:56 -0400
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 7ms (Views: 3.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 23:52:05 -0400
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 18ms (Views: 7.2ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 23:53:00 -0400
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 6ms (Views: 2.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/reviews" for 127.0.0.1 at 2018-06-03 23:56:52 -0400
+Processing by ReviewsController#index as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  ↳ app/controllers/reviews_controller.rb:9
+Completed 200 OK in 44ms (Views: 10.7ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/user_token" for 127.0.0.1 at 2018-06-03 23:57:02 -0400
+Processing by UserTokenController#create as JSON
+  Parameters: {"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}, "user_token"=>{"auth"=>{"email"=>"tim@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "tim@gmail.com"], ["LIMIT", 1]]
+  ↳ /usr/local/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 201 Created in 104ms (Views: 0.9ms | ActiveRecord: 1.0ms)
+
+

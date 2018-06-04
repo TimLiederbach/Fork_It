@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import SearchDashboard from './components/SearchDashboard'
 import RestaurantDashboard from './components/RestaurantDashboard'
 import Restaurant from './components/Restaurant'
+import ReviewList from './components/ReviewList'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -50,7 +51,6 @@ class App extends Component {
       mode: 'cors',
       body:JSON.stringify(body),
     }
-    console.log('about to fetch')
     fetch(url, init)
       .then(res => res.json())
       .then(res => console.log(res))
@@ -70,7 +70,6 @@ class App extends Component {
       mode: 'cors',
       body:JSON.stringify(body),
     }
-    console.log(url, init)
     fetch(url, init)
       .then(res => res.json())
       .then(res => localStorage.setItem("jwt", res.jwt))
@@ -89,6 +88,50 @@ class App extends Component {
     })
   }
 
+  getReviews() {
+    const jwt = localStorage.getItem("jwt")
+    const init = {
+      method: 'GET',
+      headers: {
+        "Authorization": `Bearer ${jwt}`}
+    }
+    fetch(`${BASE_URL}/reviews`, init)
+    .then(res => res.json())
+    .then(data => this.setState({
+      reviews: data,
+    }))
+    .catch(err => err)
+  }
+
+  createReview(review) {
+    const jwt = localStorage.getItem("jwt")
+    const body = {"review": {
+      "creator_email": review.creator_email,
+      "res_id": review.res_id,
+      "restaurant_name": review.restaurant_name,
+      "overall_rating": review.overall_rating,
+      "price_rating": review.price_rating,
+      "food_quality": review.food_quality,
+      "comments": review.comments
+      }
+    }
+    const init = {
+      method: 'POST',
+      headers: {
+        "Authorization": `Bearer ${jwt}`,
+        "Accept": "json/application",
+        "Content-Type": "json/application"},
+      mode: 'cors',
+      body:JSON.stringify(body)
+    }
+    fetch(`${BASE_URL}/reviews`, init)
+    .then(res => res.json())
+    .then(data => this.setState({
+      reviews: data
+    }))
+    .catch(err => err)
+  }
+
   fetchRestaurants(input) {
     const url = `https://developers.zomato.com/api/v2.1/search?entity_id=36932&q=${input.keyword}&count=20`
     const init = {
@@ -105,7 +148,6 @@ class App extends Component {
     })
     // debugger 1;
     .then(resBody=> {
-      console.log('this be resBody.res', resBody.restaurants)
       this.setState({
         restaurants: resBody.restaurants
       })
@@ -122,6 +164,7 @@ class App extends Component {
 
   componentDidMount() {
     this.isLoggedIn()
+    this.getReviews()
   }
 
 
@@ -184,10 +227,17 @@ class App extends Component {
           <Route
             path="/restaurants/:id"
             component={ (props) => (
+              <div>
               <Restaurant
                 {...props}
                 restaurant={ this.findRestaurant(props.match.params.id) }
               />
+              <ReviewList
+                {...props}
+                restaurant={ this.findRestaurant(props.match.params.id) }
+                reviews={ this.state.reviews }
+              />
+              </div>
             )} />
 
         </div>

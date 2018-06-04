@@ -5,7 +5,6 @@ function RestaurantList(props) {
 
   return (
     <div>
-      { console.log('props.restaurants', props.restaurants) }
 
       { props.restaurants.map(restaurant => (
         <Link to={ '/restaurants/' + restaurant.restaurant.id }>

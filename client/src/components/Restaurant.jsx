@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Restaurant(props) {
   console.log('props', props)
@@ -11,6 +12,7 @@ function Restaurant(props) {
         <h3> Cuisine: { props.restaurant[0].restaurant.cusines } </h3>
         <h3> Cost for Two: { props.restaurant[0].restaurant.average_cost_for_two } </h3>
         <h4> Address: { props.restaurant[0].restaurant.location.address } </h4>
+
       </div>
     </div>
   )
