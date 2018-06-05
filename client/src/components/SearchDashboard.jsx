@@ -30,17 +30,17 @@ class SearchDashboard extends Component {
 
   render() {
     return (
-      <div>
+      <div className='search-div'>
 
 
         {this.state.hasUserSubmitted && <Redirect to ='/restaurants' />}
 
 
-
-        <form onSubmit={this.handleSubmit}>
+        <form className='search' onSubmit={this.handleSubmit}>
 
           <label>
             <input
+              className='search-bar'
               type='text'
               onChange={this.handleInputChange}
               value={this.state.keyword}
@@ -51,7 +51,7 @@ class SearchDashboard extends Component {
 
           <button
             type='submit'
-            className='search-button'
+            className='button-search'
           >Search
           </button>
 

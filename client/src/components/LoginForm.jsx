@@ -31,39 +31,43 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className='login-wrapper'>
 
         {this.state.isUserLoggedIn && <Redirect to ='/search' />}
 
-        <form onSubmit={this.handleSubmit}>
+        <div className='login-div'>
+          <h3>Login Form</h3>
+          <br/>
+          <form onSubmit={this.handleSubmit}>
 
-          <label>
-            Email:
-            <input
-              type='text'
-              onChange={this.handleInputChange}
-              value={this.state.email}
-              name='email'
-            />
-          </label>
+            <label>
+              Email:
+              <input
+                type='text'
+                onChange={this.handleInputChange}
+                value={this.state.email}
+                name='email'
+              />
+            </label>
 
-          <label>
-            Password:
-            <input
-              type='password'
-              onChange={this.handleInputChange}
-              value={this.state.password}
-              name='password'
-            />
-          </label>
+            <label>
+              Password:
+              <input
+                type='password'
+                onChange={this.handleInputChange}
+                value={this.state.password}
+                name='password'
+              />
+            </label>
 
-          <button
-            type='submit'
-            className='login-button'
-          >Login
-          </button>
+            <button
+              type='submit'
+              className='login-button'
+            >Login
+            </button>
 
-        </form>
+          </form>
+        </div>
       </div>
     )
   }

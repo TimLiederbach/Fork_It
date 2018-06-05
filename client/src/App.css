@@ -31,3 +31,146 @@
   width: 95%;
   height: 30em;
 }
+
+.fork-logo {
+  width: 4em;
+  height: 4em;
+  border-radius: 5px;
+  border: 2px solid black;
+
+}
+
+.header {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw7wcXrcNXR0_vkEcUucKm_1O0NnaOxYBYhUEiigg-CLmST8tRMQ')
+}
+
+.title  {
+  color:white;
+  padding:10px;
+}
+
+.slogan  {
+  color:white;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+nav  {
+  background: #333;
+}
+
+nav ul {
+  list-style-type: none;
+  padding:0;
+  display:flex;
+  justify-content: flex-end;
+
+}
+
+.nav-link {
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+  padding:10px;
+  display: block;
+}
+
+nav li:hover  {
+  background-color: #555;
+}
+
+.search-div {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_LoT2QOzU3eVem_b8pSjITAoY-fZmnPTzOoZJLQlmm-06pVS_6g');
+  height:500px;
+  display: flex;
+  flex-direction: row;
+}
+
+.login-wrapper  {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_LoT2QOzU3eVem_b8pSjITAoY-fZmnPTzOoZJLQlmm-06pVS_6g');
+  height:300px;
+  display: flex;
+  flex-direction: row;
+}
+
+.login-div  {
+  background-color: #e3e4e8;
+  margin: auto;
+  border-radius: 25px;
+  border: 2px solid black;
+  height: 200px;
+}
+
+.search {
+  width: 490px;
+  margin: auto;
+}
+
+.search-bar {
+  margin: 0 auto;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 1rem;
+  border: 1px solid #D0CFCE;
+  outline: none;
+  &:focus{
+    border: 1px solid #008ABF;
+    transition: 0.35s ease;
+    color: #008ABF;
+    &::-webkit-input-placeholder{
+      transition: opacity 0.45s ease;
+      opacity: 0;
+     }
+    &::-moz-placeholder {
+      transition: opacity 0.45s ease;
+      opacity: 0;
+     }
+    &:-ms-placeholder {
+     transition: opacity 0.45s ease;
+     opacity: 0;
+     }
+   }
+ }
+
+.restaurant-list  {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.restaurant {
+  flex:1;
+}
+
+.rest-img {
+  border-radius: 25px;
+  border: 2px solid black;
+}
+
+.rest-text {
+  text-decoration: none;
+}
+
+.review-wrapper {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_LoT2QOzU3eVem_b8pSjITAoY-fZmnPTzOoZJLQlmm-06pVS_6g');
+  padding:20px;
+}
+
+.review-inner{
+  background-color: #e3e4e8;
+  margin: auto;
+  border-radius: 25px;
+  border: 2px solid black;
+  height: 300px;
+}
+
+@media screen and (min-width 500px) {
+  nav ul  {
+    display: flex;
+  }
+
+}

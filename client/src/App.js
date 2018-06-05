@@ -9,6 +9,7 @@ import SearchDashboard from './components/SearchDashboard'
 import RestaurantDashboard from './components/RestaurantDashboard'
 import Restaurant from './components/Restaurant'
 import ReviewList from './components/ReviewList'
+import ReviewForm from './components/ReviewForm'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -20,12 +21,20 @@ class App extends Component {
       restaurants: [],
       email: '',
       password:'',
+      images: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQhBQqgePdfkdm3c97J567SqD0NiNFPeNuheR8ZauUIGFyYnMUHA',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQalNYwrbVq1rOlG-9DEUo5LKAIpqMevRQfJmZD6YvaryJxeaBv',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR15rxi4y5tbelHKzMy0XVWid5jBiB3q3nlT-52b2BLFfuDH3TVpA',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb6SPrZ49xZwSt2vTgApZF-ctPETRXD0vcqhS-Jiic5q6gklwiBw',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc292WjGwFedgxD_R5Oq37ga9IsezMZzDKSQQm9kDW44UO1zL6EA',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqYsyFGl8IRImV0zWzU0EDxetrEQGjsjxHLhsuZgz-_zCVDrL6Sw'],
       isLoggedIn: null,
     };
     this.handleLogin = this.handleLogin.bind(this)
     this.handleRegister = this.handleRegister.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleCreate = this.handleCreate.bind(this)
+    this.logout=this.logout.bind(this)
   }
 
   isLoggedIn()  {
@@ -118,22 +127,30 @@ class App extends Component {
     const init = {
       method: 'POST',
       headers: {
-        "Authorization": `Bearer ${jwt}`,
         "Accept": "json/application",
-        "Content-Type": "json/application"},
-      mode: 'cors',
+        "Content-Type": "json/application",
+        "Authorization": `Bearer ${jwt}`
+        },
       body:JSON.stringify(body)
     }
-    fetch(`${BASE_URL}/reviews`, init)
+    const url =`${BASE_URL}/reviews`
+
+    console.log(init)
+
+    fetch(url, init)
     .then(res => res.json())
-    .then(data => this.setState({
-      reviews: data
-    }))
+    .then(resBody => {
+        this.setState((prevState, props) => {
+          return {
+            reviews: prevState.reviews.concat(resBody.data)
+          }
+        })
+      })
     .catch(err => err)
   }
 
   fetchRestaurants(input) {
-    const url = `https://developers.zomato.com/api/v2.1/search?entity_id=36932&q=${input.keyword}&count=20`
+    const url = `https://developers.zomato.com/api/v2.1/search?entity_id=36932&q=${input.keyword}&count=6`
     const init = {
       method: 'GET',
       headers: {
@@ -147,11 +164,11 @@ class App extends Component {
       return res.json();
     })
     // debugger 1;
-    .then(resBody=> {
-      this.setState({
-        restaurants: resBody.restaurants
-      })
-    })
+    .then(resBody=> console.log('resBody', resBody))
+    //   this.setState({
+    //     restaurants: resBody.restaurants
+    //   })
+    // })
     // debugger 2;
     .catch(err=> console.log(err))
   }
@@ -187,15 +204,35 @@ class App extends Component {
     this.fetchRestaurants(input);
   }
 
+  handleCreate(review)  {
+    console.log('app review', review)
+    this.createReview(review);
+  }
+
   render() {
     return (
       <Router>
         <div className="App">
-          <h1>Fork It</h1>
-          <h5>"Restaurant Recommendations"</h5>
-
-          <Navbar onLogin={ this.handleLogout } />
-
+        <div className='header'>
+          <h1 className='title'>Fork It</h1>
+          <h5 className='slogan'>"Restaurant Recommendations"</h5>
+          <img className='fork-logo' src='http://clipartstation.com/wp-content/uploads/2017/11/spoon-clipart-black-and-white-2.jpg'/>
+        </div>
+          {this.state.isLoggedIn? (
+          <nav>
+            <ul className='nav-bar'>
+              <li><Link className='nav-link' to='/search'>Search</Link></li>
+              <li><Link className='nav-link' onClick={ this.logout } to='/logout'>Logout</Link></li>
+            </ul>
+          </nav>
+          ):(
+          <nav>
+            <ul className='nav-bar'>
+              <li><Link className='nav-link' to='/login'>Login</Link></li>
+              <li><Link className='nav-link' to='/register'>Register</Link></li>
+            </ul>
+          </nav>
+          )}
           <Route
             exact path = "/"
             component = { Landing }
@@ -221,6 +258,7 @@ class App extends Component {
             render = { () => (
               <RestaurantDashboard
                 restaurants={ this.state.restaurants }
+                images={this.state.images}
               />)}
           />
 
@@ -230,16 +268,37 @@ class App extends Component {
               <div>
               <Restaurant
                 {...props}
-                restaurant={ this.findRestaurant(props.match.params.id) }
+                restaurant={ this.findRestaurant(props.match.params.id)}
+                images={ this.state.images }
               />
               <ReviewList
                 {...props}
                 restaurant={ this.findRestaurant(props.match.params.id) }
                 reviews={ this.state.reviews }
+                email={this.state.email}
+                onSubmit={this.handleCreate}
               />
               </div>
             )} />
 
+          <Route
+            exact path="/reviews"
+            render={() =>
+              <ReviewList
+                reviews={this.state.reviews}
+                email={this.state.email}
+                onDelete={this.handleDelete}
+                onEdit={this.handleEdit}
+              /> }
+          />
+
+          <Route
+            exact path="/new"
+            render={()=>
+              <ReviewForm
+                onSubmit={this.handleSubmit}
+              />}
+          />
         </div>
       </Router>
     );
@@ -247,3 +306,5 @@ class App extends Component {
 }
 
 export default App;
+              // <li><Link className='nav-link' to='/reviews'>Reviews</Link></li>
+// <Navbar onLogin={ this.handleLogout } />

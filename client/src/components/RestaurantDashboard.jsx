@@ -2,25 +2,27 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 function RestaurantList(props) {
-
+  console.log(props)
   return (
-    <div>
+    <div className="restaurant-list">
 
-      { props.restaurants.map(restaurant => (
+      { props.restaurants.map((restaurant, index) => (
         <Link to={ '/restaurants/' + restaurant.restaurant.id }>
           <div className="restaurant" key={ restaurant.restaurant.id } >
 
-            <h3> { restaurant.restaurant.name } </h3>
+            <h3 className='rest-text'> { restaurant.restaurant.name } </h3>
 
-            <h4> Rating:
+            <img className='rest-img' src={props.images[index]}/>
+
+            <h4 className='rest-text'> Rating:
               { restaurant.restaurant.user_rating.aggregate_rating }
             </h4>
 
-            <h5> Price for two:
+            <h5 className='rest-text'> Price for two:
               { restaurant.restaurant.average_cost_for_two }
             </h5>
 
-            <h4>Location:
+            <h4 className='rest-text'>Location:
               { restaurant.restaurant.location.address }
             </h4>
 

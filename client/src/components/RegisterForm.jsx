@@ -33,49 +33,51 @@ class RegisterForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className='login-wrapper'>
 
         {this.state.isUserLoggedIn && <Redirect to ='/login' />}
+        <div className='login-div'>
+          <h3>Register Form</h3>
+          <form onSubmit={this.handleSubmit}>
 
-        <form onSubmit={this.handleSubmit}>
+            <label>
+              User Name:
+              <input
+                type='text'
+                onChange={this.handleInputChange}
+                value={this.state.username}
+                name='username'
+              />
+            </label>
 
-          <label>
-            User Name:
-            <input
-              type='text'
-              onChange={this.handleInputChange}
-              value={this.state.username}
-              name='username'
-            />
-          </label>
+            <label>
+              Email:
+              <input
+                type='email'
+                onChange={this.handleInputChange}
+                value={this.state.email}
+                name='email'
+              />
+            </label>
 
-          <label>
-            Email:
-            <input
-              type='email'
-              onChange={this.handleInputChange}
-              value={this.state.email}
-              name='email'
-            />
-          </label>
+            <label>
+              Password:
+              <input
+                type='password'
+                onChange={this.handleInputChange}
+                value={this.state.password}
+                name='password'
+              />
+            </label>
 
-          <label>
-            Password:
-            <input
-              type='password'
-              onChange={this.handleInputChange}
-              value={this.state.password}
-              name='password'
-            />
-          </label>
+            <button
+              type='submit'
+              className='login-button'
+            >Register
+            </button>
 
-          <button
-            type='submit'
-            className='login-button'
-          >Register
-          </button>
-
-        </form>
+          </form>
+        </div>
       </div>
     )
   }

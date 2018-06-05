@@ -8,6 +8,7 @@ function Restaurant(props) {
     <div>
       <div className='restaurant-card'>
         <h2> { props.restaurant[0].restaurant.name } </h2>
+        <img className='rest-img' src={props.images[0]} alt='restaurant'/>
         <h3> Rating: { props.restaurant[0].restaurant.user_rating.aggregate_rating } </h3>
         <h3> Cuisine: { props.restaurant[0].restaurant.cusines } </h3>
         <h3> Cost for Two: { props.restaurant[0].restaurant.average_cost_for_two } </h3>

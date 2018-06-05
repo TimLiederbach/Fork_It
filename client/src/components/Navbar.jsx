@@ -1,40 +1,59 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class Navbar extends Component {
-  constructor(props)  {
-    super(props);
-  }
 
-  render() {
-    const isCurrentUser = this.props.currentUser;
+function Navbar (props) {
+    const isCurrentUser = props.isLoggedIn;
     const display = isCurrentUser ? (
-          <div className='nav'>
-            <div
+          <div className='nav-right-side'>
+
+            <div className='nav-element'
+            >
+              <Link
+                to="/"
+                className='nav-link'>
+                Search
+              </Link>
+            </div>
+
+            <div className='nav-element'
+            >
+              <Link
+                to="/reviews"
+                className='nav-link'>
+                Reviews
+              </Link>
+            </div>
+
+            <div className='nav-element'
               name='Logout'
             >
               <Link
                 onSubmit={ this.handleLogout }
-                to="/">
+                to="/"
+                className='nav-link'>
                 Logout
               </Link>
             </div>
+
           </div>
         ) :
         (
-          <div>
+          <div className='nav-right-side'>
             <div
               name='login'
+              className='nav-element'
             >
-              <Link to="/login">
+              <Link to="/login" className='nav-link'>
                 Login
               </Link>
             </div>
 
             <div
               name='register'
+              className='nav-element'
             >
-              <Link to = '/register'>
+              <Link to = '/register' className='nav-link'>
                Register
               </Link>
             </div>
@@ -42,12 +61,13 @@ class Navbar extends Component {
 
         )
     return (
-      <div>
-        { display }
-      </div>
-    )
 
-  }
+      <nav>
+
+        { display }
+
+      </nav>
+    )
 }
 
 export default Navbar;
